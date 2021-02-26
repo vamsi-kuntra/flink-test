@@ -1,0 +1,6 @@
+FROM golang:latest
+RUN mkdir /app
+ADD . /app
+WORKDIR /app
+RUN go build -o flink-web .
+CMD ["/app/flink-web"

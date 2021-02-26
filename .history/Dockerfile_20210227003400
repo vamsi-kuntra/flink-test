@@ -1,0 +1,15 @@
+FROM golang:latest
+RUN mkdir /app
+ADD . /app
+WORKDIR /app
+RUN go build -o flink-web .
+CMD ["/app/flink-web"
+
+
+
+FROM golang:latest
+RUN apk --no-cache add gcc g++ make git
+WORKDIR /go/src/app
+COPY . .
+RUN go get ./...
+RUN GOOS=linux go build -ldflags="-s -w" -o ./bin/web-app ./main.go
